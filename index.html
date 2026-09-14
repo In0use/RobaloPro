@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Suporte PWA para iOS Standalone -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="RobaloPro">
+    <meta name="theme-color" content="#070a12">
+    
+    <title>RobaloPro - Guia de Troféus & Marés</title>
+    
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-title">
+            <h1>🌊 RobaloPro</h1>
+            <span class="tag">Troféus & Marés</span>
+        </div>
+        <div class="beach-selector">
+            <button class="beach-btn active" onclick="selecionarPraia('esp', this)">Espinho</button>
+            <button class="beach-btn" onclick="selecionarPraia('sil', this)">Silvalde</button>
+            <button class="beach-btn" onclick="selecionarPraia('par', this)">Paramos</button>
+            <button class="beach-btn" onclick="selecionarPraia('esm', this)">Esmoriz</button>
+            <button class="beach-btn" onclick="selecionarPraia('cor', this)">Cortegaça</button>
+            <button class="beach-btn" onclick="selecionarPraia('fur', this)">Furadouro</button>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="section-label" id="sectionLabel">Análise Completa por Dia</div>
+        <div id="cardsContainer">
+            <div style="text-align:center; color: var(--text-sub); padding: 50px 0;">A obter dados do mar e marés...</div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="fecharModal(event)">
+        <div class="modal-body" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Guia de Pesca</h2>
+                    <span id="modalSub" style="font-size: 0.78rem; color: var(--text-sub);"></span>
+                </div>
+                <button class="close-btn" onclick="fecharModal()">✕</button>
+            </div>
+            
+            <div class="full-chart-box">
+                <canvas id="modalChart"></canvas>
+            </div>
+
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- JavaScripts Externos Divididos -->
+    <script src="data.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>
