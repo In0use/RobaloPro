@@ -48,7 +48,7 @@ function renderizarCardsDias() {
                     <canvas id="${chartId}"></canvas>
                 </div>
 
-                <div class="click-full-hint">Toca para abrir a tábua de marés & estratégia ➔</div>
+                <div class="click-full-hint">Toca para abrir a tábua de marés & tática ➔</div>
             </div>
         `;
         container.innerHTML += cardHTML;
@@ -173,12 +173,21 @@ function abrirPopUpCompleto(chaveDia) {
 
     const indiceCalha = (avgVaga * avgPeriodo).toFixed(1);
     let estadoMarInfo = "";
+    let iscoRecomendado = "";
+    let estralhoRecomendado = "";
+
     if (indiceCalha > 16) {
         estadoMarInfo = "🌊 <strong>Calha Funda com Água Branca:</strong> Mar forte e com muita energia. Excelente abertura de buracos na areia.";
+        iscoRecomendado = "🦀 Caranguejo Mouro / Pilado ou 🦑 Tiras Espessas de Choco";
+        estralhoRecomendado = "0.28mm a 0.32mm Fluorocarbono (Chumbo de Garra 160g-180g)";
     } else if (indiceCalha >= 10) {
         estadoMarInfo = "🌊 <strong>Calha Equilibrada:</strong> Condição perfeita de rebentação sem arrasto excessivo de chumbo.";
+        iscoRecomendado = "🐟 Sardinha com elástico ou 🦀 Caranguejo de casca mole";
+        estralhoRecomendado = "0.25mm a 0.28mm Fluorocarbono (Chumbo Pirâmide/URFE 140g-160g)";
     } else {
         estadoMarInfo = "☀️ <strong>Água Limpa / Mar Manso:</strong> Pouca rebentação. Exige montagens mais finas e discretas.";
+        iscoRecomendado = "🪱 Tiagem ativa, Biqueirão fresco ou Tiras finas de Lula";
+        estralhoRecomendado = "0.20mm a 0.22mm Fluorocarbono longo (2 metros)";
     }
 
     let estrategiaRobalo = "";
@@ -210,6 +219,20 @@ function abrirPopUpCompleto(chaveDia) {
         <div class="tactic-section" style="border-left: 4px solid var(--accent-green);">
             <div class="tactic-title">🌀 Análise da Calha & Rebentação</div>
             <p class="tactic-desc">${estadoMarInfo}</p>
+        </div>
+
+        <div class="tactic-section">
+            <div class="tactic-title">🪱 Isco & Montagem Prioritária para Hoje</div>
+            <div class="bait-grid">
+                <div class="bait-card">
+                    <strong>Iscagem Recomendada:</strong>
+                    ${iscoRecomendado}
+                </div>
+                <div class="bait-card">
+                    <strong>Terminal & Chumbo:</strong>
+                    ${estralhoRecomendado}
+                </div>
+            </div>
         </div>
 
         <div class="tactic-section">
@@ -254,5 +277,7 @@ function fecharModal(e) {
         document.getElementById('modalOverlay').classList.remove('active');
     }
 }
+
+carregarDados();
 
 carregarDados();
