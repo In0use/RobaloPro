@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     
+    <!-- Ícone da App (iPhone, Android e Favicon) -->
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="apple-touch-icon" href="logo.svg">
+    
     <!-- Suporte PWA para iOS Standalone -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,17 +16,17 @@
     
     <title>RobaloPro - Guia de Troféus & Marés</title>
     
-    <!-- CSS Externo -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
     <header class="app-header">
         <div class="header-title">
-            <h1>🌊 RobaloPro</h1>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="logo.svg" alt="RobaloPro Logo" style="width: 32px; height: 32px; border-radius: 8px;">
+                <h1>RobaloPro</h1>
+            </div>
             <span class="tag">Troféus & Marés</span>
         </div>
         <div class="beach-selector">
@@ -60,7 +64,6 @@
         </div>
     </div>
 
-    <!-- JavaScripts Externos Divididos -->
     <script src="data.js"></script>
     <script src="ui.js"></script>
 </body>
