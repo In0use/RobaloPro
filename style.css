@@ -1,8 +1,8 @@
 :root {
     --bg: #070a12;
-    --card-bg: rgba(18, 24, 38, 0.7);
+    --card-bg: rgba(18, 24, 38, 0.75);
     --card-border: rgba(255, 255, 255, 0.08);
-    --card-border-hover: rgba(56, 189, 248, 0.3);
+    --card-border-hover: rgba(56, 189, 248, 0.35);
     --text-main: #f8fafc;
     --text-sub: #94a3b8;
     --accent-green: #10b981;
@@ -17,17 +17,14 @@
     --glow-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-* { 
-    box-sizing: border-box; 
-    -webkit-tap-highlight-color: transparent; 
-}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg);
     background-image: 
-        radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.10) 0px, transparent 50%);
     background-attachment: fixed;
     color: var(--text-main);
     margin: 0;
@@ -126,12 +123,6 @@ body {
     box-shadow: var(--glow-shadow);
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: fadeIn 0.4s ease-out forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .day-card:hover {
@@ -153,7 +144,6 @@ body {
     font-weight: 800;
     color: #ffffff;
     text-transform: capitalize;
-    letter-spacing: -0.01em;
 }
 
 .day-sub {
@@ -178,7 +168,6 @@ body {
     font-size: 1.05rem;
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 0.02em;
 }
 
 .jornada-label {
@@ -186,7 +175,6 @@ body {
     color: var(--accent-blue);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
 .score-badge {
@@ -229,7 +217,6 @@ body {
     display: none;
     justify-content: center; 
     align-items: flex-end;
-    transition: opacity 0.3s ease;
 }
 
 .modal-overlay.active { display: flex; }
@@ -243,13 +230,6 @@ body {
     max-width: 650px; 
     max-height: 88vh; 
     overflow-y: auto;
-    box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
-    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
 }
 
 .modal-header {
@@ -278,8 +258,6 @@ body {
     justify-content: center;
 }
 
-.close-btn:active { background: rgba(255,255,255,0.2); }
-
 .full-chart-box {
     height: 210px; 
     background: rgba(0, 0, 0, 0.4); 
@@ -299,6 +277,23 @@ body {
 
 .tactic-title { font-size: 0.9rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 8px; }
 .tactic-desc { font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin: 0; }
+
+.bait-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.bait-card {
+    background: rgba(56, 189, 248, 0.05);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 0.8rem;
+}
+
+.bait-card strong { color: #ffffff; display: block; margin-bottom: 2px; }
 
 .hourly-table {
     width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.78rem;
@@ -330,9 +325,7 @@ body {
     text-decoration: none; 
     color: #ffffff; 
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.15s ease;
 }
-.gps-btn:active { transform: scale(0.97); }
 .btn-maps { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
 .btn-waze { background: linear-gradient(135deg, #00d2ff 0%, #00a8ff 100%); color: #000000; }
 .btn-telegram { 
