@@ -112,7 +112,7 @@ async function carregarDados() {
         renderizarCardsDias();
     } catch (err) {
         console.error(err);
-        container.innerHTML = `<div style="text-align:center; color:#f87171; padding:30px;">Erro ao carregar dados. <br><button onclick="carregarDados()">Tentar de novo</button></div>`;
+        container.innerHTML = `<div style="text-align:center; color:#f87171; padding:30px;">Erro ao carregar dados.<br><button onclick="carregarDados()">Tentar de novo</button></div>`;
     }
 }
 
@@ -178,6 +178,7 @@ function abrirPopUpCompleto(chaveDia) {
     const diaNomeStr = diaData.data.toLocaleDateString('pt-PT', { weekday: 'long', day: '2-digit', month: '2-digit' });
     const avgPressao = Math.round(diaData.pressoes.reduce((a,b)=>a+b,0)/diaData.pressoes.length);
     const avgVaga = (diaData.vagas.reduce((a,b)=>a+b,0)/diaData.vagas.length);
+    const avgPeriodo = (diaData.periodos.reduce((a,b)=>a+b,0)/diaData.periodos.length);
     const janela = calcularJanelaHorarios(diaData);
     const { niveisMares, iconsPeixe } = gerarCurvaMares(diaData.data, janela.idxInicio);
 
@@ -203,6 +204,29 @@ function abrirPopUpCompleto(chaveDia) {
         linhasTabela += `<tr><td><strong>${diaData.horasStr[i]}</strong>${iconsPeixe[i] ? ' 🐟' : ''}</td><td>${niveisMares[i]}m</td><td>${diaData.vagas[i]}m (${getDirecaoTexto(diaData.dirVagas[i])})</td><td>${diaData.ventos[i]}km/h</td><td>${diaData.pressoes[i]} hPa</td></tr>`;
     }
 
+    // Tática de Lançamento e Iscagem Avançada
+    let ondeAtirar = "";
+    let iscoRecomendado = "";
+    let estralhoRecomendado = "";
+    let estrategiaRobalo = "";
+
+    if (avgVaga >= 1.4) {
+        ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança para o <strong>fundo da calha principal (buraco das águas brancas)</strong>. Procura a zona onde a vaga parte e deixa o chumbo assentado na vala.";
+        iscoRecomendado = "🦀 Caranguejo Mouro / Pilado, Filete de Sardinha com elástico ou Tiras Grossas de Choco";
+        estralhoRecomendado = "0.28mm - 0.32mm Fluorocarbono (Chumbo Garra/Pirâmide 150g-180g)";
+        estrategiaRobalo = "<strong>Tática para Robalo Grande:</strong> O mar mexido escava o fundo da areia. Mantém a linha tensa e usa um espetão alto para passar a primeira rebentação.";
+    } else if (avgVaga >= 1.0) {
+        ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança no <strong>corredor de saída da espuma (no declive onde a vaga morre)</strong>. Os robalos patrulham a transição entre o fundo fundo e a rebentação raso.";
+        iscoRecomendado = "🐟 Sardinha fresca atada com elástico ou Caranguejo de casca mole";
+        estralhoRecomendado = "0.25mm - 0.28mm Fluorocarbono (Chumbo URFE / Pirâmide 140g-160g)";
+        estrategiaRobalo = "<strong>Tática Equilibrada:</strong> Condição perfeita. Alterna entre iscagens de sardinha (para libertar óleo) e caranguejo vivo.";
+    } else {
+        ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança <strong>o mais longe possível para além dos pontões/poços profundos</strong>. Com mar manso o peixe afasta-se da margem.";
+        iscoRecomendado = "🪱 Tiagem ativa, Biqueirão fresco ou Tiras finas de Lula fresca";
+        estralhoRecomendado = "0.20mm - 0.22mm Fluorocarbono ultra-longo (2 metros)";
+        estrategiaRobalo = "<strong>Tática em Água Limpa:</strong> Mar calmo exige discrição total. Usa baixadas compridas e anzois mais pequenos (ex: Aberdeen nº 1 ou 2).";
+    }
+
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${config.lat},${config.lon}`;
     const wazeUrl = `https://waze.com/ul?ll=${config.lat},${config.lon}&navigate=yes`;
 
@@ -211,9 +235,17 @@ function abrirPopUpCompleto(chaveDia) {
             <div class="tactic-title">⏰ Horário de Pesca & Atividade 🐟</div>
             <p class="tactic-desc"><strong>Janela Ideal:</strong> ${janela.inicioStr} às ${janela.fimStr}</p>
         </div>
+        <div class="tactic-section" style="border-left:4px solid var(--accent-green);">
+            <div class="tactic-title">📍 Zona de Lançamento (Estratégia)</div>
+            <p class="tactic-desc">${ondeAtirar}</p>
+        </div>
         <div class="tactic-section">
-            <div class="tactic-title">🪱 Isco Recomendado</div>
-            <p class="tactic-desc">${avgVaga > 1.4 ? '🦀 Caranguejo Mouro / Pilado ou 🦑 Tiras de Choco' : '🪱 Tiagem ativa, Biqueirão fresco ou Lula'}</p>
+            <div class="tactic-title">🪱 Isco & Terminal Recomendado</div>
+            <p class="tactic-desc"><strong>Iscos:</strong> ${iscoRecomendado}<br><strong>Montagem:</strong> ${estralhoRecomendado}</p>
+        </div>
+        <div class="tactic-section">
+            <div class="tactic-title">🐟 Tática para Troféus</div>
+            <p class="tactic-desc">${estrategiaRobalo}</p>
         </div>
         <div class="tactic-section">
             <div class="tactic-title">📊 Previsão Detalhada</div>
