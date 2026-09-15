@@ -4,28 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- Ícone para Navegador e PWA (iOS e Android) -->
-    <link rel="icon" type="image/svg+xml" href="logo.svg?v=2">
-    <link rel="apple-touch-icon" href="logo.svg?v=2">
-    <link rel="shortcut icon" href="logo.svg?v=2">
-    
-    <!-- Configurações PWA Standalone -->
+    <!-- Suporte PWA para iOS Standalone -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="RobaloPro">
     <meta name="theme-color" content="#070a12">
     
+    <!-- Ícone SVG Base -->
+    <link rel="icon" type="image/svg+xml" href="logo.svg?v=3">
+    <link id="appleIcon" rel="apple-touch-icon" href="logo.svg?v=3">
+    
     <title>RobaloPro - Guia de Troféus & Marés</title>
     
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Script de Conversão PNG Nativo para iOS -->
+    <script>
+        (function() {
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.src = "logo.svg?v=3";
+            img.onload = function() {
+                const canvas = document.createElement("canvas");
+                canvas.width = 180;
+                canvas.height = 180;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, 180, 180);
+                const pngUrl = canvas.toDataURL("image/png");
+                
+                let link = document.getElementById("appleIcon");
+                if (link) { link.href = pngUrl; }
+            };
+        })();
+    </script>
 </head>
 <body>
 
     <header class="app-header">
         <div class="header-title">
             <div style="display: flex; align-items: center; gap: 10px;">
-                <img src="logo.svg" alt="RobaloPro Logo" style="width: 32px; height: 32px; border-radius: 8px;">
+                <img src="logo.svg?v=3" alt="RobaloPro Logo" style="width: 32px; height: 32px; border-radius: 8px;">
                 <h1>RobaloPro</h1>
             </div>
             <span class="tag">Troféus & Marés</span>
@@ -65,7 +84,6 @@
         </div>
     </div>
 
-    <!-- Script único corrigido -->
     <script src="app.js"></script>
 </body>
 </html>
