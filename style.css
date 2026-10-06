@@ -32,22 +32,26 @@ body {
     min-height: 100vh;
 }
 
+/* --- Cabeçalho e Menus --- */
 .app-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(7, 10, 18, 0.85);
+    background: rgba(7, 10, 18, 0.88);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--card-border);
     padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .header-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 4px;
 }
 
 .header-title h1 { 
@@ -70,6 +74,21 @@ body {
     border: 1px solid rgba(56, 189, 248, 0.2);
     letter-spacing: 0.03em;
     text-transform: uppercase;
+}
+
+.selector-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.selector-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-sub);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-left: 2px;
 }
 
 .beach-selector {
@@ -101,6 +120,13 @@ body {
     box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
 }
 
+/* Linha separadora entre os dois menus */
+.species-selector {
+    border-top: 1px dashed rgba(255, 255, 255, 0.05);
+    padding-top: 10px;
+}
+
+/* --- Conteúdo Principal --- */
 .content { padding: 20px 16px; max-width: 650px; margin: 0 auto; }
 
 .section-label {
@@ -208,6 +234,7 @@ body {
     opacity: 0.9;
 }
 
+/* --- Pop-up (Modal) --- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0, 0, 0, 0.75); 
@@ -278,23 +305,6 @@ body {
 .tactic-title { font-size: 0.9rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 8px; }
 .tactic-desc { font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin: 0; }
 
-.bait-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.bait-card {
-    background: rgba(56, 189, 248, 0.05);
-    border: 1px solid rgba(56, 189, 248, 0.15);
-    border-radius: 12px;
-    padding: 10px;
-    font-size: 0.8rem;
-}
-
-.bait-card strong { color: #ffffff; display: block; margin-bottom: 2px; }
-
 .hourly-table {
     width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.78rem;
 }
@@ -328,9 +338,3 @@ body {
 }
 .btn-maps { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
 .btn-waze { background: linear-gradient(135deg, #00d2ff 0%, #00a8ff 100%); color: #000000; }
-.btn-telegram { 
-    grid-column: span 2; 
-    background: linear-gradient(135deg, #229ED9 0%, #0088cc 100%); 
-    color: #fff; 
-    margin-top: 4px;
-}
