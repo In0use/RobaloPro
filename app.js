@@ -8,7 +8,7 @@ const PRAIAS = {
 };
 
 let praiaAtual = 'esp';
-let especieAtual = 'robalo'; // Nova variável de espécie
+let especieAtual = 'robalo';
 let dadosPorDia = {};
 let miniCharts = {};
 let modalChartInstance = null;
@@ -24,7 +24,7 @@ function selecionarEspecie(id, btn) {
     document.querySelectorAll('.species-selector .beach-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     especieAtual = id;
-    carregarDados(); // Recarrega os dados para atualizar a vista
+    carregarDados();
 }
 
 function getDirecaoTexto(graus) {
@@ -186,7 +186,7 @@ function abrirPopUpCompleto(chaveDia) {
     const diaNomeStr = diaData.data.toLocaleDateString('pt-PT', { weekday: 'long', day: '2-digit', month: '2-digit' });
     const avgPressao = Math.round(diaData.pressoes.reduce((a,b)=>a+b,0)/diaData.pressoes.length);
     const avgVaga = (diaData.vagas.reduce((a,b)=>a+b,0)/diaData.vagas.length);
-    const avgPeriodo = (diaData.periodos.reduce((a,b)=>a+b,0)/diaData.periodos.length);
+    
     const janela = calcularJanelaHorarios(diaData);
     const { niveisMares, iconsPeixe } = gerarCurvaMares(diaData.data, janela.idxInicio);
 
@@ -212,44 +212,51 @@ function abrirPopUpCompleto(chaveDia) {
         linhasTabela += `<tr><td><strong>${diaData.horasStr[i]}</strong>${iconsPeixe[i] ? ' 🐟' : ''}</td><td>${niveisMares[i]}m</td><td>${diaData.vagas[i]}m (${getDirecaoTexto(diaData.dirVagas[i])})</td><td>${diaData.ventos[i]}km/h</td><td>${diaData.pressoes[i]} hPa</td></tr>`;
     }
 
-    // Tática de Lançamento e Iscagem Multi-Espécie
+    // Tática Específica para Surfcasting
     let ondeAtirar = "";
     let iscoRecomendado = "";
     let estralhoRecomendado = "";
     let estrategiaPeixe = "";
 
     switch (especieAtual) {
-        case 'congro':
-            ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Procura fundões marcados, zonas de pedra ou a vala mais profunda. O peixe encosta mais com a maré a encher e à noite.";
-            iscoRecomendado = "🐟 Boneca de sardinha embebida em óleo (ex: La Sirène), lula, polvo ou sardinha inteira.";
-            estralhoRecomendado = "Linha 0.50mm (ex: Asso Double Strength), anzol 3/0 (ex: Sasame Super-X), destorcedores rolling fortes. Chumbada 150g a 170g (Garra).";
-            estrategiaPeixe = "<strong>Tática Pesada:</strong> Ferragem forte necessária. Prepara os estralhos para suportar abrasão nos dentes e no fundo.";
+        case 'dourada':
+            ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Procura os caneiros fundos e coroas de areia. Pede lançamentos longos (OTG) para águas mais abertas e fundas.";
+            iscoRecomendado = "🦀 Caranguejo-pilado, casulo, navalha ou camarão salgado.";
+            estralhoRecomendado = "Estralho longo (1.5m a 2m) em fluorocarbono 0.28mm a 0.35mm. Anzóis Chinu (ex: Vega 514). Chumbada de 150g.";
+            estrategiaPeixe = "<strong>Tática Dourada:</strong> Fica atento aos toques secos na ponteira. Dá um pouco de linha antes de ferrar. Prefere águas mais limpas e mares menos mexidos.";
+            break;
+
+        case 'sargo':
+            ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança na escoa das águas brancas, na rebentação e junto a zonas mistas ou esporões.";
+            iscoRecomendado = "🦐 Camarão salgado, filete de sardinha atado com elástico elástico vermelho, ou casulo.";
+            estralhoRecomendado = "Estralhos médios (0.25mm - 0.30mm). Anzóis robustos (ex: Vega Wide Eyes 744). Chumbada pirâmide ou garra (150g-160g) para agarrar na corrente.";
+            estrategiaPeixe = "<strong>Tática Sargo:</strong> O sargo adora a espuma onde a onda mexe o fundo à procura de alimento. Mantém o isco a trabalhar na zona de rebentação.";
             break;
 
         case 'linguado':
-            ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança para os fundos de areia limpa a média distância, logo atrás da primeira rebentação onde a água assenta.";
-            iscoRecomendado = "🪱 Biqueirão salgado, filete de sardinha, casulo ou até um caboz vivo pequeno.";
-            estralhoRecomendado = "Separador URFE, pénaltis com missangas cruzadas 0.8mm. Estralho 0.22mm a 0.35mm (ex: Vega Power Force XT), anzol Aberdeen (ex: Vega 648). Chumbada Pirâmide 150g.";
-            estrategiaPeixe = "<strong>Tática de Fino:</strong> Mar calmo a mexido é ideal. Mantém a montagem colada ao fundo para atrair os peixes planos.";
+            ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança a curta/média distância, para os fundos de areia limpa logo atrás da primeira rebentação.";
+            iscoRecomendado = "🪱 Biqueirão salgado, filete de sardinha, caboz vivo ou casulo.";
+            estralhoRecomendado = "Separador URFE com pénaltis e missangas cruzadas 0.8mm. Fio 0.22mm (ex: Vega Power Force XT), anzol Aberdeen (ex: Vega 648). Chumbo pirâmide 150g.";
+            estrategiaPeixe = "<strong>Tática Peixes Planos:</strong> Mar calmo a mexido é ideal. Mantém a montagem colada ao fundo. Ao enrolar, podes arrastar ligeiramente o chumbo na areia para atrair os rodovalhos.";
             break;
 
         case 'robalo':
         default:
             if (avgVaga >= 1.4) {
                 ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança para o fundo da calha principal (buraco das águas brancas).";
-                iscoRecomendado = "🦀 Caranguejo Pilado, Filete de Sardinha com elástico vermelho ou Tiras Grossas de Choco.";
+                iscoRecomendado = "🦀 Caranguejo Pilado, Filete de Sardinha com elástico ou lula fresca.";
                 estralhoRecomendado = "0.28mm - 0.35mm (Chumbo Garra/Pirâmide 150g-170g). Anzóis Chinu ou Wide Eyes.";
-                estrategiaPeixe = "<strong>Tática para Robalo Grande:</strong> O mar mexido escava o fundo da areia. Usa lançamento OTG (Off The Ground) para colocar o isco no fundão.";
+                estrategiaPeixe = "<strong>Tática para Robalo Grande:</strong> O mar mexido escava a areia. Exige um lançamento OTG potente para chegar à zona onde o robalo espera que a comida levante do fundo.";
             } else if (avgVaga >= 1.0) {
-                ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança no corredor de saída da espuma (no declive onde a vaga morre).";
+                ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança no corredor de saída da espuma, no declive onde a vaga morre.";
                 iscoRecomendado = "🐟 Sardinha fresca atada com elástico ou Caranguejo de casca mole.";
-                estralhoRecomendado = "0.25mm - 0.28mm Fluorocarbono (Chumbo URFE / Pirâmide 150g).";
-                estrategiaPeixe = "<strong>Tática Equilibrada:</strong> Condição perfeita. Alterna entre iscagens de sardinha e caranguejo vivo.";
+                estralhoRecomendado = "0.25mm - 0.28mm em URFE (Chumbo Pirâmide 150g).";
+                estrategiaPeixe = "<strong>Tática Equilibrada:</strong> Condição perfeita. Alterna entre iscagens de sardinha a libertar óleo e iscos rijos.";
             } else {
                 ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança o mais longe possível para além dos pontões/poços profundos.";
                 iscoRecomendado = "🪱 Casulo, Biqueirão fresco ou Tiras finas de Lula fresca.";
-                estralhoRecomendado = "0.20mm - 0.22mm Fluorocarbono ultra-longo (2 metros).";
-                estrategiaPeixe = "<strong>Tática em Água Limpa:</strong> Mar calmo exige discrição total. Usa baixadas compridas e anzois mais pequenos.";
+                estralhoRecomendado = "Fio 0.22mm (ex: Vega Power Force) num estralho ultra-longo (2 metros).";
+                estrategiaPeixe = "<strong>Tática em Água Limpa:</strong> Mar calmo exige discrição total. Usa baixadas compridas e anzois Aberdeen mais pequenos.";
             }
             break;
     }
