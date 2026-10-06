@@ -49,27 +49,21 @@
             </div>
             <span class="tag">Troféus & Marés</span>
         </div>
-
-        <div class="selector-group">
-            <div class="selector-label">📍 Zona de Pesca</div>
-            <div class="beach-selector">
-                <button class="beach-btn active" onclick="selecionarPraia('esp', this)">Espinho</button>
-                <button class="beach-btn" onclick="selecionarPraia('sil', this)">Silvalde</button>
-                <button class="beach-btn" onclick="selecionarPraia('par', this)">Paramos</button>
-                <button class="beach-btn" onclick="selecionarPraia('esm', this)">Esmoriz</button>
-                <button class="beach-btn" onclick="selecionarPraia('cor', this)">Cortegaça</button>
-                <button class="beach-btn" onclick="selecionarPraia('fur', this)">Furadouro</button>
-            </div>
+        <div class="beach-selector">
+            <button class="beach-btn active" onclick="selecionarPraia('esp', this)">Espinho</button>
+            <button class="beach-btn" onclick="selecionarPraia('sil', this)">Silvalde</button>
+            <button class="beach-btn" onclick="selecionarPraia('par', this)">Paramos</button>
+            <button class="beach-btn" onclick="selecionarPraia('esm', this)">Esmoriz</button>
+            <button class="beach-btn" onclick="selecionarPraia('cor', this)">Cortegaça</button>
+            <button class="beach-btn" onclick="selecionarPraia('fur', this)">Furadouro</button>
         </div>
-
-        <div class="selector-group">
-            <div class="selector-label">🐟 Espécie Alvo</div>
-            <div class="beach-selector species-selector">
-                <button class="beach-btn active" onclick="selecionarEspecie('robalo', this)">Robalo</button>
-                <button class="beach-btn" onclick="selecionarEspecie('dourada', this)">Dourada</button>
-                <button class="beach-btn" onclick="selecionarEspecie('sargo', this)">Sargo</button>
-                <button class="beach-btn" onclick="selecionarEspecie('linguado', this)">Rodovalho / Linguado</button>
-            </div>
+        
+        <!-- Novo Seletor de Espécies -->
+        <div class="beach-selector species-selector" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--card-border);">
+            <button class="beach-btn active" onclick="selecionarEspecie('robalo', this)">Robalo</button>
+            <button class="beach-btn" onclick="selecionarEspecie('dourada', this)">Dourada</button>
+            <button class="beach-btn" onclick="selecionarEspecie('sargo', this)">Sargo</button>
+            <button class="beach-btn" onclick="selecionarEspecie('linguado', this)">Rodovalho / Lin.</button>
         </div>
     </header>
 
