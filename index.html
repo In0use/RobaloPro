@@ -58,39 +58,14 @@
             <button class="beach-btn" onclick="selecionarPraia('fur', this)">Furadouro</button>
         </div>
 
-        <!-- Novo Seletor de Espécies -->
+        <!-- Novo Seletor de Espécies Surfcasting -->
         <div class="beach-selector species-selector" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--card-border);">
             <button class="beach-btn active" onclick="selecionarEspecie('robalo', this)">Robalo</button>
-            <button class="beach-btn" onclick="selecionarEspecie('congro', this)">Congro</button>
-            <button class="beach-btn" onclick="selecionarEspecie('linguado', this)">Linguado / Fundo</button>
+            <button class="beach-btn" onclick="selecionarEspecie('dourada', this)">Dourada</button>
+            <button class="beach-btn" onclick="selecionarEspecie('sargo', this)">Sargo</button>
+            <button class="beach-btn" onclick="selecionarEspecie('linguado', this)">Rodovalho / Linguado</button>
         </div>
     </header>
 
     <main class="content">
-        <div class="section-label" id="sectionLabel">Análise Completa por Dia</div>
-        <div id="cardsContainer">
-            <div style="text-align:center; color: var(--text-sub); padding: 50px 0;">A obter dados do mar e marés...</div>
-        </div>
-    </main>
-
-    <div class="modal-overlay" id="modalOverlay" onclick="fecharModal(event)">
-        <div class="modal-body" onclick="event.stopPropagation()">
-            <div class="modal-header">
-                <div>
-                    <h2 id="modalTitle">Guia de Pesca</h2>
-                    <span id="modalSub" style="font-size: 0.78rem; color: var(--text-sub);"></span>
-                </div>
-                <button class="close-btn" onclick="fecharModal()">✕</button>
-            </div>
-            
-            <div class="full-chart-box">
-                <canvas id="modalChart"></canvas>
-            </div>
-
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
-</body>
-</html>
+        <div class="section-label" id="sectionLabel">Análise Comple
