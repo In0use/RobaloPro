@@ -14,7 +14,7 @@ let miniCharts = {};
 let modalChartInstance = null;
 
 function selecionarPraia(id, btn) {
-    document.querySelectorAll('.beach-selector:not(.species-selector) .beach-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.selector-group:first-of-type .beach-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     praiaAtual = id;
     carregarDados();
@@ -228,7 +228,7 @@ function abrirPopUpCompleto(chaveDia) {
 
         case 'sargo':
             ondeAtirar = "🎯 <strong>Onde Atirar:</strong> Lança na escoa das águas brancas, na rebentação e junto a zonas mistas ou esporões.";
-            iscoRecomendado = "🦐 Camarão salgado, filete de sardinha atado com elástico elástico vermelho, ou casulo.";
+            iscoRecomendado = "🦐 Camarão salgado, filete de sardinha atado com elástico vermelho, ou casulo.";
             estralhoRecomendado = "Estralhos médios (0.25mm - 0.30mm). Anzóis robustos (ex: Vega Wide Eyes 744). Chumbada pirâmide ou garra (150g-160g) para agarrar na corrente.";
             estrategiaPeixe = "<strong>Tática Sargo:</strong> O sargo adora a espuma onde a onda mexe o fundo à procura de alimento. Mantém o isco a trabalhar na zona de rebentação.";
             break;
